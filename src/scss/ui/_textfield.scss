@@ -1,13 +1,13 @@
 
 
-.m-textfield {
+.p-textfield {
     border: 1px solid #222;
     border-radius: 4px;
     position: relative;
     background-color: #666;
 }
 
-.m-textfield > span {
+.p-textfield > span {
     display: inline-block;
     user-select: none;
     color: #333;
@@ -19,7 +19,7 @@
     top: 16px;
 }
 
-.m-textfield > input {
+.p-textfield > input {
     border: none;
     background-color: transparent;
     font-size: 16px;
@@ -32,8 +32,8 @@
     padding-top: 20px;
 }
 
-.m-textfield.filled > input + span,
-.m-textfield > input:focus + span {
+.p-textfield.filled > input + span,
+.p-textfield > input:focus + span {
     font-size: 12px;
     top: 1px;
     background-color: #fff;

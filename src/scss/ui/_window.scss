@@ -1,5 +1,5 @@
 
-.window {
+.p-window {
   position: absolute;
   border-width: 1px;
   border-style: solid;
@@ -7,11 +7,11 @@
   overflow: hidden;
 }
 
-.window-bar {
+.p-window-bar {
   height: 30px;
 }
 
-.window-resizer {
+.p-window-resizer {
   position: absolute;
   bottom: 0px;
   right: 0px;

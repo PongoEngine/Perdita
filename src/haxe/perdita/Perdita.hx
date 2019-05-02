@@ -16,7 +16,7 @@ class Perdita
     public static function textfield<Model, Msg>(msg :Textfield -> String -> Msg, field :Textfield) :RenderFunction<Model, Msg>
     {
         var filledClass = field.value == "" ? "" : " filled";
-        return div([CLASS("m-textfield" + filledClass)], [
+        return div([CLASS("p-textfield" + filledClass)], [
             input([ON_INPUT(msg.bind(field)), VALUE(new String(field.value))]),
             span([], field.label)
         ]);
@@ -29,33 +29,33 @@ class Perdita
 
         var content = window.isOpen ? 
             [
-                h1([CLASS("accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title),
+                h1([CLASS("p-accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title),
                 div([], children)
-            ] : [h1([CLASS("accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title)];
+            ] : [h1([CLASS("p-accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title)];
 
-        return div([CLASS("accordianItem color-container-lighter border-bottom" + heightClass)], content);
+        return div([CLASS("p-accordianItem color-container-lighter border-bottom" + heightClass)], content);
     }
 
     public static function drawer<Model, Msg>(stretch :Drawer -> MouseEvent -> Msg, toggle :Drawer -> Msg, drawer :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         var openClass = drawer.isOpen ? " open" : " closed";
         var content = drawer.isOpen 
-            ? div([CLASS("flex-column drawer-content color-container border-left border-right")], children)
+            ? div([CLASS("flex-column p-drawer-content color-container border-left border-right")], children)
             : div([], []);
         var leftClass = drawer.isLeft ? " left" : "";
         var activeClass = drawer.isActive ? " active" : "";
 
         var innerConent = [
-            h1([CLASS("drawer-collapser toggler color-actionable" + activeClass), MOUSE_DOWN(stretch.bind(drawer)), ON_DBL_CLICK(toggle(drawer))], "⋮"),
+            h1([CLASS("p-drawer-collapser toggler color-actionable" + activeClass), MOUSE_DOWN(stretch.bind(drawer)), ON_DBL_CLICK(toggle(drawer))], "⋮"),
             content,
-            div([CLASS("drawer-collapser barrier")], [])
+            div([CLASS("p-drawer-collapser barrier")], [])
         ];
         if(drawer.isLeft) {
             innerConent.reverse();
         }
 
         return div([
-            CLASS("drawer color-container flex-row border-right border-left" + openClass + leftClass), 
+            CLASS("p-drawer color-container flex-row border-right border-left" + openClass + leftClass), 
             STYLE({width: drawer.width + "px"})
         ], innerConent);
     }
@@ -66,7 +66,7 @@ class Perdita
         if(button.isActive) {
             attrs.push(ATTR("checked", true));
         }
-        return label([CLASS("switch")], [
+        return label([CLASS("p-switch")], [
             input(attrs),
             span([],"")
         ]);
@@ -75,7 +75,7 @@ class Perdita
     public static function window<Model, Msg>(selectWindow :Window -> Bool -> MouseEvent -> Msg, window :Window, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         return div([
-            CLASS("window color-container"), 
+            CLASS("p-window color-container"), 
             MOUSE_DOWN(selectWindow.bind(window, false)),
             STYLE({
                 left: window.position.x + "px", 
@@ -84,10 +84,10 @@ class Perdita
                 height: window.dimensions.y + "px"
             })
         ], [
-            div([CLASS("window-bar color-container-darker border-bottom")], []),
+            div([CLASS("p-window-bar color-container-darker border-bottom")], []),
             div([CLASS("flex-column")], children),
             div([
-                CLASS("window-resizer color-container-lighter border-left border-top"),
+                CLASS("p-window-resizer color-container-lighter border-left border-top"),
                 MOUSE_DOWN(selectWindow.bind(window, true))
             ], [])
         ]);

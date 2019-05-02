@@ -1,17 +1,17 @@
-.switch {
+.p-switch {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 20px;
 }
 
-.switch > input {
+.p-switch > input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.switch > span {
+.p-switch > span {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -21,7 +21,7 @@
   background-color: #ccc;
 }
 
-.switch > span:before {
+.p-switch > span:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -31,18 +31,18 @@
   background-color: white;
 }
 
-.switch > input:checked + span {
+.p-switch > input:checked + span {
   background-color: #222;
 }
 
-.switch > input:checked + span:before {
+.p-switch > input:checked + span:before {
   transform: translateX(20px);
 }
 
-.switch > span {
+.p-switch > span {
   border-radius: 34px;
 }
 
-.switch > span:before {
+.p-switch > span:before {
   border-radius: 50%;
 }

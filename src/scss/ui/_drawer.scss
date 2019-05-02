@@ -1,19 +1,19 @@
 $collapser-width: 16px;
 
-.drawer {
+.p-drawer {
   height: 100%;
   width: 20px;
   flex-shrink: 0;
 }
-.drawer.left {
+.p-drawer.left {
   justify-content: flex-end;
 }
 
-.drawer-content {
+.p-drawer-content {
   width: 100%;
 }
 
-.drawer-collapser {
+.p-drawer-collapser {
   text-align: center;
   user-select: none;
   cursor: pointer;
@@ -21,10 +21,10 @@ $collapser-width: 16px;
   font-size: 32px;
 }
 
-.drawer-collapser.toggler {
+.p-drawer-collapser.toggler {
   width: $collapser-width;
 }
 
-.drawer-collapser.barrier {
+.p-drawer-collapser.barrier {
   width: 2px;
 }
