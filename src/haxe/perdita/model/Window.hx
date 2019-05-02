@@ -1,8 +1,9 @@
 package perdita.model;
 
 import js.Browser.window;
+import perdita.model.util.Point;
 
-class FloatingWindow
+class Window
 {
     public var position :Point;
     public var dimensions :Point;

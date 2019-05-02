@@ -1,6 +1,6 @@
 package perdita.model;
 
-class Button
+class Toggle
 {
 	public var isActive :Bool;
 

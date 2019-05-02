@@ -1,6 +1,6 @@
 package perdita.model;
 
-class WindowContent
+class AccordianItem
 {
 	public var title :String;
 	public var isOpen :Bool;

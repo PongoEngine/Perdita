@@ -1,0 +1,48 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch > input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch > span {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+}
+
+.switch > span:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+}
+
+.switch > input:checked + span {
+  background-color: #222;
+}
+
+.switch > input:checked + span:before {
+  transform: translateX(20px);
+}
+
+.switch > span {
+  border-radius: 34px;
+}
+
+.switch > span:before {
+  border-radius: 50%;
+}

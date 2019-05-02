@@ -1,4 +1,4 @@
-package perdita.model;
+package perdita.model.util;
 
 class Point
 {

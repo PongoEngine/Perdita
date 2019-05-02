@@ -5,16 +5,15 @@ import towser.Html;
 import towser.Attribute;
 import towser.RenderFunction;
 import perdita.model.Textfield;
-import perdita.model.WindowContent;
+import perdita.model.AccordianItem;
 import perdita.model.Drawer;
-import perdita.model.Button;
-import perdita.model.Text;
-import perdita.model.FloatingWindow;
+import perdita.model.Toggle;
+import perdita.model.Window;
 import js.html.MouseEvent;
 
 class Perdita
 {
-    public static function textFieldOutlined<Model, Msg>(msg :Textfield -> String -> Msg, field :Textfield) :RenderFunction<Model, Msg>
+    public static function textfield<Model, Msg>(msg :Textfield -> String -> Msg, field :Textfield) :RenderFunction<Model, Msg>
     {
         var filledClass = field.value == "" ? "" : " filled";
         return div([CLASS("m-textfield-outlined" + filledClass)], [
@@ -23,7 +22,7 @@ class Perdita
         ]);
     }
 
-    public static function collapsingWindow<Model, Msg>(toggleWindow :WindowContent -> Msg, window :WindowContent, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
+    public static function accordianItem<Model, Msg>(toggleWindow :AccordianItem -> Msg, window :AccordianItem, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         var heightClass = window.isOpen ? " open" : "";
         var arrow = window.isOpen ? "▼ " : "▶ ";
@@ -37,31 +36,31 @@ class Perdita
         return div([CLASS("collapse color-container-lighter border-bottom" + heightClass)], content);
     }
 
-    public static function drawer<Model, Msg>(stretchColumn :Drawer -> MouseEvent -> Msg, toggleColumn :Drawer -> Msg, column :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
+    public static function drawer<Model, Msg>(stretch :Drawer -> MouseEvent -> Msg, toggle :Drawer -> Msg, drawer :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
-        var openClass = column.isOpen ? " open" : " closed";
-        var content = column.isOpen 
-            ? div([CLASS("flex-column column-content color-container border-left border-right")], children)
+        var openClass = drawer.isOpen ? " open" : " closed";
+        var content = drawer.isOpen 
+            ? div([CLASS("flex-column drawer-content color-container border-left border-right")], children)
             : div([], []);
-        var leftClass = column.isLeft ? " left" : "";
-        var activeClass = column.isActive ? " active" : "";
+        var leftClass = drawer.isLeft ? " left" : "";
+        var activeClass = drawer.isActive ? " active" : "";
 
         var innerConent = [
-            h1([CLASS("column-collapser toggler color-actionable" + activeClass), MOUSE_DOWN(stretchColumn.bind(column)), ON_DBL_CLICK(toggleColumn(column))], "⋮"),
+            h1([CLASS("drawer-collapser toggler color-actionable" + activeClass), MOUSE_DOWN(stretch.bind(drawer)), ON_DBL_CLICK(toggle(drawer))], "⋮"),
             content,
-            div([CLASS("column-collapser barrier")], [])
+            div([CLASS("drawer-collapser barrier")], [])
         ];
-        if(column.isLeft) {
+        if(drawer.isLeft) {
             innerConent.reverse();
         }
 
         return div([
-            CLASS("column color-container flex-row border-right border-left" + openClass + leftClass), 
-            STYLE({width: column.width + "px"})
+            CLASS("drawer color-container flex-row border-right border-left" + openClass + leftClass), 
+            STYLE({width: drawer.width + "px"})
         ], innerConent);
     }
 
-    public static function toggle<Model, Msg>(toggleButton :Button -> Msg, button :Button) : RenderFunction<Model, Msg> 
+    public static function toggle<Model, Msg>(toggleButton :Toggle -> Msg, button :Toggle) : RenderFunction<Model, Msg> 
     {
         var attrs = [TYPE("checkbox")];
         if(button.isActive) {
@@ -73,23 +72,23 @@ class Perdita
         ]);
     }
 
-    public static function floater<Model, Msg>(selectWindow :FloatingWindow -> Bool -> MouseEvent -> Msg, floatingWindow :FloatingWindow, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
+    public static function window<Model, Msg>(selectWindow :Window -> Bool -> MouseEvent -> Msg, window :Window, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         return div([
             CLASS("hover-window color-container"), 
-            MOUSE_DOWN(selectWindow.bind(floatingWindow, false)),
+            MOUSE_DOWN(selectWindow.bind(window, false)),
             STYLE({
-                left: floatingWindow.position.x + "px", 
-                top: floatingWindow.position.y + "px",
-                width: floatingWindow.dimensions.x + "px",
-                height: floatingWindow.dimensions.y + "px"
+                left: window.position.x + "px", 
+                top: window.position.y + "px",
+                width: window.dimensions.x + "px",
+                height: window.dimensions.y + "px"
             })
         ], [
             div([CLASS("hover-window-bar color-container-darker border-bottom")], []),
             div([CLASS("flex-column")], children),
             div([
                 CLASS("hover-window-resizer color-container-lighter border-left border-top"),
-                MOUSE_DOWN(selectWindow.bind(floatingWindow, true))
+                MOUSE_DOWN(selectWindow.bind(window, true))
             ], [])
         ]);
     }
