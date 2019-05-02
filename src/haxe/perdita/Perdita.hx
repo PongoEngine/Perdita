@@ -16,7 +16,7 @@ class Perdita
     public static function textfield<Model, Msg>(msg :Textfield -> String -> Msg, field :Textfield) :RenderFunction<Model, Msg>
     {
         var filledClass = field.value == "" ? "" : " filled";
-        return div([CLASS("m-textfield-outlined" + filledClass)], [
+        return div([CLASS("m-textfield" + filledClass)], [
             input([ON_INPUT(msg.bind(field)), VALUE(new String(field.value))]),
             span([], field.label)
         ]);
@@ -29,11 +29,11 @@ class Perdita
 
         var content = window.isOpen ? 
             [
-                h1([CLASS("collapse-title"), ON_CLICK(toggleWindow(window))], arrow + window.title),
+                h1([CLASS("accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title),
                 div([], children)
-            ] : [h1([CLASS("collapse-title"), ON_CLICK(toggleWindow(window))], arrow + window.title)];
+            ] : [h1([CLASS("accordianItem-title"), ON_CLICK(toggleWindow(window))], arrow + window.title)];
 
-        return div([CLASS("collapse color-container-lighter border-bottom" + heightClass)], content);
+        return div([CLASS("accordianItem color-container-lighter border-bottom" + heightClass)], content);
     }
 
     public static function drawer<Model, Msg>(stretch :Drawer -> MouseEvent -> Msg, toggle :Drawer -> Msg, drawer :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
@@ -75,7 +75,7 @@ class Perdita
     public static function window<Model, Msg>(selectWindow :Window -> Bool -> MouseEvent -> Msg, window :Window, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         return div([
-            CLASS("hover-window color-container"), 
+            CLASS("window color-container"), 
             MOUSE_DOWN(selectWindow.bind(window, false)),
             STYLE({
                 left: window.position.x + "px", 
@@ -84,10 +84,10 @@ class Perdita
                 height: window.dimensions.y + "px"
             })
         ], [
-            div([CLASS("hover-window-bar color-container-darker border-bottom")], []),
+            div([CLASS("window-bar color-container-darker border-bottom")], []),
             div([CLASS("flex-column")], children),
             div([
-                CLASS("hover-window-resizer color-container-lighter border-left border-top"),
+                CLASS("window-resizer color-container-lighter border-left border-top"),
                 MOUSE_DOWN(selectWindow.bind(window, true))
             ], [])
         ]);
