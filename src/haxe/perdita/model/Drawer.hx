@@ -1,20 +1,18 @@
 package perdita.model;
 
-class Column
+class Drawer
 {
 	public var width(default, null) :Int;
 	public var isOpen(default, null) :Bool;
 	public var isLeft(default, null) :Bool;
 	public var isActive :Bool;
-	public var windows(default, null) :Array<WindowContent>;
 
-	public function new(windows :Array<WindowContent>, isLeft :Bool):Void 
+	public function new(isLeft :Bool):Void 
 	{
 		this.width = 400;
 		this.isOpen = true;
 		this.isLeft = isLeft;
 		this.isActive = false;
-		this.windows = windows;
 	}
 
 	public function stretchBy(val :Int) : Bool

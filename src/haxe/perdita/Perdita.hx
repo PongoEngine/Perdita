@@ -6,7 +6,7 @@ import towser.Attribute;
 import towser.RenderFunction;
 import perdita.model.Textfield;
 import perdita.model.WindowContent;
-import perdita.model.Column;
+import perdita.model.Drawer;
 import perdita.model.Button;
 import perdita.model.Text;
 import perdita.model.FloatingWindow;
@@ -37,7 +37,7 @@ class Perdita
         return div([CLASS("collapse color-container-lighter border-bottom" + heightClass)], content);
     }
 
-    public static function column<Model, Msg>(stretchColumn :Column -> MouseEvent -> Msg, toggleColumn :Column -> Msg, column :Column, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
+    public static function drawer<Model, Msg>(stretchColumn :Drawer -> MouseEvent -> Msg, toggleColumn :Drawer -> Msg, column :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         var openClass = column.isOpen ? " open" : " closed";
         var content = column.isOpen 
