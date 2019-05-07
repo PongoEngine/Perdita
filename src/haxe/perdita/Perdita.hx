@@ -97,8 +97,8 @@ class Perdita
     public static function lineItem<Model, Msg>(toggleLineItem :LineItem -> Msg, lineItem :LineItem, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         return div([CLASS("p-line-item color-container-darkest")], [
-			div([CLASS("color-container-lighter")], [
-				span([CLASS("p-line-item-toggle"), ON_CLICK(toggleLineItem(lineItem))], (lineItem.isExpanded ? "-" : "+")),
+			div([CLASS("color-container-lighter"), ON_CLICK(toggleLineItem(lineItem))], [
+				span([CLASS("p-line-item-toggle")], (lineItem.isExpanded ? "-" : "+")),
 				span([CLASS("p-line-item-title")], lineItem.title)
 			]),
 			lineItem.isExpanded ? div([CLASS("p-line-item-children")], children) : span([], "")
