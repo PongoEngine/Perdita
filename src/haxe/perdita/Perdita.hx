@@ -7,6 +7,7 @@ import towser.RenderFunction;
 import perdita.model.Textfield;
 import perdita.model.AccordianItem;
 import perdita.model.Drawer;
+import perdita.model.LineItem;
 import perdita.model.Toggle;
 import perdita.model.Window;
 import js.html.MouseEvent;
@@ -91,5 +92,16 @@ class Perdita
                 MOUSE_DOWN(selectWindow.bind(window, true))
             ], [])
         ]);
+    }
+
+    public static function lineItem<Model, Msg>(toggleLineItem :LineItem -> Msg, lineItem :LineItem, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
+    {
+        return div([CLASS("p-line-item color-container-darkest")], [
+			div([CLASS("color-container-lighter")], [
+				span([CLASS("p-line-item-toggle"), ON_CLICK(toggleLineItem(lineItem))], (lineItem.isExpanded ? "-" : "+")),
+				span([CLASS("p-line-item-title")], lineItem.title)
+			]),
+			lineItem.isExpanded ? div([CLASS("p-line-item-children")], children) : span([], "")
+		]);
     }
 }

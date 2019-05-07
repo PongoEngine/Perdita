@@ -27,6 +27,15 @@ $focus-border-color: #ce3;
     border-color: $focus-border-color;
 }
 
+.color-container-darkest {
+    background-color: #222;
+    color: #eee;
+    border-color: #222;
+}
+.color-container-darkest:focus {
+    border-color: $focus-border-color;
+}
+
 .color-actionable {
     background-color: #333;
     color: #eee;

@@ -1,0 +1,30 @@
+.p-line-item {
+  word-wrap: none;
+}
+
+.p-line-item-toggle {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  margin: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.p-line-item-title {
+  user-select: none;
+}
+
+.p-line-item-children {
+  margin-left: 10px;
+}
+
+.p-line-item .p-line-item {
+  border-left-style: solid;
+  border-left-width: 1px;
+
+  border-top-style: solid;
+  border-top-width: 1px;
+}
