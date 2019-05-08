@@ -1,5 +1,8 @@
 package perdita.model;
 
+import haxe.Serializer;
+import haxe.Unserializer;
+
 class Textfield
 {
 	public var label :String;
@@ -9,5 +12,17 @@ class Textfield
 	{
 		this.label = label;
 		this.value = value;
+	}
+
+	@:keep
+	function hxSerialize(s:Serializer) {
+		s.serialize(label);
+		s.serialize(value);
+	}
+
+	@:keep
+	function hxUnserialize(u:Unserializer) {
+		label = u.unserialize();
+		value = u.unserialize();
 	}
 }

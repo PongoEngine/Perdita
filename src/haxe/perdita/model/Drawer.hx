@@ -1,5 +1,8 @@
 package perdita.model;
 
+import haxe.Serializer;
+import haxe.Unserializer;
+
 class Drawer
 {
 	public var width(default, null) :Int;
@@ -44,6 +47,22 @@ class Drawer
 	{
 		this.width = width;
 		this.isOpen = true;
+	}
+
+	@:keep
+	function hxSerialize(s:Serializer) {
+		s.serialize(width);
+		s.serialize(isOpen);
+		s.serialize(isLeft);
+		s.serialize(isActive);
+	}
+
+	@:keep
+	function hxUnserialize(u:Unserializer) {
+		width = u.unserialize();
+		isOpen = u.unserialize();
+		isLeft = u.unserialize();
+		isActive = u.unserialize();
 	}
 
 	public static inline var MIN_WIDTH :Int = 16;

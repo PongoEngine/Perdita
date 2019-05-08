@@ -2,6 +2,8 @@ package perdita.model;
 
 import js.Browser.window;
 import perdita.model.util.Point;
+import haxe.Serializer;
+import haxe.Unserializer;
 
 class Window
 {
@@ -40,4 +42,18 @@ class Window
             this.position.y = Std.int(window.innerHeight - this.dimensions.y);
         }
     }
+
+    @:keep
+	function hxSerialize(s:Serializer) {
+		s.serialize(position);
+		s.serialize(dimensions);
+		s.serialize(isUpdatingWidth);
+	}
+
+	@:keep
+	function hxUnserialize(u:Unserializer) {
+		position = u.unserialize();
+		dimensions = u.unserialize();
+		isUpdatingWidth = u.unserialize();
+	}
 }

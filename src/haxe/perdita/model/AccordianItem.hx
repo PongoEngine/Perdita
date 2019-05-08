@@ -1,5 +1,8 @@
 package perdita.model;
 
+import haxe.Serializer;
+import haxe.Unserializer;
+
 class AccordianItem
 {
 	public var title :String;
@@ -15,5 +18,17 @@ class AccordianItem
 	{
 		this.isOpen = !this.isOpen;
 		return true;
+	}
+
+	@:keep
+	function hxSerialize(s:Serializer) {
+		s.serialize(title);
+		s.serialize(isOpen);
+	}
+
+	@:keep
+	function hxUnserialize(u:Unserializer) {
+		title = u.unserialize();
+		isOpen = u.unserialize();
 	}
 }
