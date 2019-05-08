@@ -2,6 +2,13 @@
   word-wrap: none;
 }
 
+.p-line-item-heading {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .p-line-item-toggle {
   width: 20px;
   height: 20px;
