@@ -12,12 +12,9 @@ import towser.html.Attributes.*;
 import towser.html.Events.*;
 import towser.html.Html.*;
 
-import engine.Model;
-import engine.Update;
-
 class Perdita
 {
-    public static function textfield(msg :Textfield -> InputEvent -> GenMsg, field :Textfield) :RenderFunction<Model, GenMsg>
+    public static function textfield<Model, Msg>(msg :Textfield -> InputEvent -> Msg, field :Textfield) :RenderFunction<Model, Msg>
     {
         var filledClass = field.value == "" ? "" : " filled";
         return div([class_("p-textfield" + filledClass)], [
@@ -26,7 +23,7 @@ class Perdita
         ]);
     }
 
-    public static function accordianItem(toggleWindow :AccordianItem -> MouseEvent -> GenMsg, window :AccordianItem, children :Array<RenderFunction<Model, GenMsg>>) : RenderFunction<Model, GenMsg> 
+    public static function accordianItem<Model, Msg>(toggleWindow :AccordianItem -> MouseEvent -> Msg, window :AccordianItem, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         var heightClass = window.isOpen ? " open" : "";
         var arrow = window.isOpen ? "▼ " : "▶ ";
@@ -40,7 +37,7 @@ class Perdita
         return div([class_("p-accordianItem color-container-lighter border-bottom" + heightClass)], content);
     }
 
-    public static function drawer(stretch :Drawer -> MouseEvent -> GenMsg, toggle :Drawer -> MouseEvent -> GenMsg, drawer :Drawer, children :Array<RenderFunction<Model, GenMsg>>) : RenderFunction<Model, GenMsg> 
+    public static function drawer<Model, Msg>(stretch :Drawer -> MouseEvent -> Msg, toggle :Drawer -> MouseEvent -> Msg, drawer :Drawer, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         var openClass = drawer.isOpen ? " open" : " closed";
         var content = drawer.isOpen 
@@ -64,7 +61,7 @@ class Perdita
         ], innerConent);
     }
 
-    public static function toggle(toggleButton :Toggle -> GenMsg, button :Toggle) : RenderFunction<Model, GenMsg> 
+    public static function toggle<Model, Msg>(toggleButton :Toggle -> Msg, button :Toggle) : RenderFunction<Model, Msg> 
     {
         return label([class_("p-switch")], [
             input([type("checkbox"), checked(button.isActive)]),
@@ -72,7 +69,7 @@ class Perdita
         ]);
     }
 
-    public static function window(selectWindow :Window -> Bool -> MouseEvent -> GenMsg, window :Window, children :Array<RenderFunction<Model, GenMsg>>) : RenderFunction<Model, GenMsg> 
+    public static function window<Model, Msg> (selectWindow :Window -> Bool -> MouseEvent -> Msg, window :Window, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
         return div([
             class_("p-window color-container"), 
@@ -93,9 +90,8 @@ class Perdita
         ]);
     }
 
-    public static function lineItem(toggleLineItem :LineItem -> MouseEvent -> GenMsg, lineItem :LineItem, line :RenderFunction<Model, GenMsg>, children :Array<RenderFunction<Model, GenMsg>>) : RenderFunction<Model, GenMsg> 
+    public static function lineItem<Model, Msg>(toggleLineItem :LineItem -> MouseEvent -> Msg, lineItem :LineItem, line :RenderFunction<Model, Msg>, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
-        // return div([], []);
         return div([class_("p-line-item color-container-darkest")], [
 			div([class_("color-container-lighter p-line-item-heading")], [
 				span([class_("p-line-item-toggle"), onclick(toggleLineItem.bind(lineItem))], [text((lineItem.isExpanded ? "▼" : "►"))]),
