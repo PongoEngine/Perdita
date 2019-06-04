@@ -7,6 +7,10 @@
   overflow: hidden;
 }
 
+.p-window:active {
+  border-width: 2px;
+}
+
 .p-window-bar {
   height: 30px;
 }
