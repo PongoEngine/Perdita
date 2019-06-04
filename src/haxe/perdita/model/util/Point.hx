@@ -1,8 +1,5 @@
 package perdita.model.util;
 
-import haxe.Serializer;
-import haxe.Unserializer;
-
 class Point
 {
 	public var x :Int;
@@ -14,21 +11,9 @@ class Point
 		this.y = y;
 	}
 
-	public inline function update(x :Int, y :Int) : Void
+	public static inline function update(point :Point, x :Int, y :Int) : Void
 	{
-		this.x = x;
-		this.y = y;
-	}
-
-	@:keep
-	function hxSerialize(s:Serializer) {
-		s.serialize(x);
-		s.serialize(y);
-	}
-
-	@:keep
-	function hxUnserialize(u:Unserializer) {
-		x = u.unserialize();
-		y = u.unserialize();
+		point.x = x;
+		point.y = y;
 	}
 }

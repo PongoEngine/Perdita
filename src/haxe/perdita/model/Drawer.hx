@@ -1,8 +1,5 @@
 package perdita.model;
 
-import haxe.Serializer;
-import haxe.Unserializer;
-
 class Drawer
 {
 	public var width(default, null) :Int;
@@ -18,51 +15,35 @@ class Drawer
 		this.isActive = false;
 	}
 
-	public function stretchBy(val :Int) : Bool
+	public static function stretchBy(drawer :Drawer, val :Int) : Bool
 	{
-		var dist = this.isLeft ? val : val * -1;
-		this.width += dist;
-		this.isOpen = true;
+		var dist = drawer.isLeft ? val : val * -1;
+		drawer.width += dist;
+		drawer.isOpen = true;
 
-		if(this.width < COLLAPSING_WIDTH) {
-			this.isOpen = false;
+		if(drawer.width < COLLAPSING_WIDTH) {
+			drawer.isOpen = false;
 		}
 		return true;
 	}
 
-	public function checkWidth() : Void
+	public static function checkWidth(drawer :Drawer) : Void
 	{
-		if(this.width < COLLAPSING_WIDTH) {
-			this.width = MIN_WIDTH;
+		if(drawer.width < COLLAPSING_WIDTH) {
+			drawer.width = MIN_WIDTH;
 		}
 	}
 
-	public function close() : Void
+	public static function close(drawer :Drawer) : Void
 	{
-		this.width = MIN_WIDTH;
-		this.isOpen = false;
+		drawer.width = MIN_WIDTH;
+		drawer.isOpen = false;
 	}
 
-	public function open(width :Int) : Void
+	public static function open(drawer :Drawer, width :Int) : Void
 	{
-		this.width = width;
-		this.isOpen = true;
-	}
-
-	@:keep
-	function hxSerialize(s:Serializer) {
-		s.serialize(width);
-		s.serialize(isOpen);
-		s.serialize(isLeft);
-		s.serialize(isActive);
-	}
-
-	@:keep
-	function hxUnserialize(u:Unserializer) {
-		width = u.unserialize();
-		isOpen = u.unserialize();
-		isLeft = u.unserialize();
-		isActive = u.unserialize();
+		drawer.width = width;
+		drawer.isOpen = true;
 	}
 
 	public static inline var MIN_WIDTH :Int = 16;

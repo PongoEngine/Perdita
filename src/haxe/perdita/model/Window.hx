@@ -2,8 +2,6 @@ package perdita.model;
 
 import js.Browser.window;
 import perdita.model.util.Point;
-import haxe.Serializer;
-import haxe.Unserializer;
 
 class Window
 {
@@ -18,42 +16,28 @@ class Window
         this.isUpdatingWidth = false;
 	}
 
-    public function resizeTo(x :Int, y :Int) : Void
+    public static function resizeTo(thisWindow :Window, x :Int, y :Int) : Void
     {
-        var width = (x - this.position.x) + 6;
-        var height = y - this.position.y + 6;
+        var width = (x - thisWindow.position.x) + 6;
+        var height = y - thisWindow.position.y + 6;
 
-        this.dimensions.x = Std.int(Math.max(60, width));
-        this.dimensions.y = Std.int(Math.max(80, height));
+        thisWindow.dimensions.x = Std.int(Math.max(60, width));
+        thisWindow.dimensions.y = Std.int(Math.max(80, height));
     }
 
-    public function moveBy(x :Int, y :Int) : Void
+    public static function moveBy(thisWindow :Window, x :Int, y :Int) : Void
     {
-        var nX = this.position.x + x;
-        var nY = this.position.y + y;
-        this.position.x = Std.int(Math.max(0, nX));
-        this.position.y = Std.int(Math.max(0, nY));
+        var nX = thisWindow.position.x + x;
+        var nY = thisWindow.position.y + y;
+        thisWindow.position.x = Std.int(Math.max(0, nX));
+        thisWindow.position.y = Std.int(Math.max(0, nY));
 
-        if(this.position.x + this.dimensions.x > window.innerWidth) {
-            this.position.x = Std.int(window.innerWidth - this.dimensions.x);
+        if(thisWindow.position.x + thisWindow.dimensions.x > window.innerWidth) {
+            thisWindow.position.x = Std.int(window.innerWidth - thisWindow.dimensions.x);
         }
 
-        if(this.position.y + this.dimensions.y > window.innerHeight) {
-            this.position.y = Std.int(window.innerHeight - this.dimensions.y);
+        if(thisWindow.position.y + thisWindow.dimensions.y > window.innerHeight) {
+            thisWindow.position.y = Std.int(window.innerHeight - thisWindow.dimensions.y);
         }
     }
-
-    @:keep
-	function hxSerialize(s:Serializer) {
-		s.serialize(position);
-		s.serialize(dimensions);
-		s.serialize(isUpdatingWidth);
-	}
-
-	@:keep
-	function hxUnserialize(u:Unserializer) {
-		position = u.unserialize();
-		dimensions = u.unserialize();
-		isUpdatingWidth = u.unserialize();
-	}
 }
