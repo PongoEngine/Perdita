@@ -55,7 +55,7 @@ class Perdita
             innerConent.reverse();
         }
 
-        return div([
+        return div(drawer.id.toString(), [
             class_("p-drawer color-container flex-row border-right border-left" + openClass + leftClass), 
             style({width: drawer.width + "px"})
         ], innerConent);
@@ -71,18 +71,23 @@ class Perdita
 
     public static function window<Model, Msg> (selectWindow :Window -> Bool -> MouseEvent -> Msg, window :Window, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
-        return div([
+        // transform
+        // translate()
+        var transform = 'translate3d(${window.position.x}px, ${window.position.y}px, 0)';
+
+        return div(window.id.toString(), [
             class_("p-window color-container"), 
             onmousedown(selectWindow.bind(window, false)),
             style({
-                left: window.position.x + "px", 
-                top: window.position.y + "px",
+                // left: window.position.x + "px", 
+                // top: window.position.y + "px",
+                transform: transform,
                 width: window.dimensions.x + "px",
                 height: window.dimensions.y + "px"
             })
         ], [
             div([class_("p-window-bar color-container-darker border-bottom")], []),
-            div([class_("flex-column")], children),
+            div([class_("flex-column p-window-content")], children),
             div([
                 class_("p-window-resizer color-container-lighter border-left border-top"),
                 onmousedown(selectWindow.bind(window, true))
@@ -92,7 +97,7 @@ class Perdita
 
     public static function lineItem<Model, Msg>(toggleLineItem :LineItem -> MouseEvent -> Msg, lineItem :LineItem, line :RenderFunction<Model, Msg>, children :Array<RenderFunction<Model, Msg>>) : RenderFunction<Model, Msg> 
     {
-        return div([class_("p-line-item color-container-darkest")], [
+        return div(lineItem.id.toString(), [class_("p-line-item color-container-darkest")], [
 			div([class_("color-container-lighter p-line-item-heading")], [
 				span([class_("p-line-item-toggle"), onclick(toggleLineItem.bind(lineItem))], [text((lineItem.isExpanded ? "▼" : "►"))]),
 				line

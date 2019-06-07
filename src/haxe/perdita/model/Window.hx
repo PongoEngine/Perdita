@@ -2,18 +2,21 @@ package perdita.model;
 
 import js.Browser.window;
 import perdita.model.util.Point;
+import perdita.model.util.UUID;
 
 class Window
 {
-    public var position :Point;
-    public var dimensions :Point;
+    public var position (default, null) :Point;
+    public var dimensions (default, null) :Point;
     public var isUpdatingWidth :Bool;
+    public var id (default, null) :WindowId;
 
-	public function new() : Void
+	public function new(id :WindowId) : Void
 	{
         this.position = new Point(100, 100);
         this.dimensions = new Point(100, 100);
         this.isUpdatingWidth = false;
+        this.id = id;
 	}
 
     public static function resizeTo(thisWindow :Window, x :Int, y :Int) : Void

@@ -1,18 +1,22 @@
 package perdita.model;
 
+import perdita.model.util.UUID;
+
 class Drawer
 {
-	public var width(default, null) :Int;
-	public var isOpen(default, null) :Bool;
-	public var isLeft(default, null) :Bool;
+	public var width (default, null) :Int;
+	public var isOpen (default, null) :Bool;
+	public var isLeft (default, null) :Bool;
 	public var isActive :Bool;
+	public var id (default, null) :DrawerId;
 
-	public function new(isLeft :Bool):Void 
+	public function new(isLeft :Bool, id :DrawerId):Void 
 	{
 		this.width = 400;
 		this.isOpen = true;
 		this.isLeft = isLeft;
 		this.isActive = false;
+		this.id = id;
 	}
 
 	public static function stretchBy(drawer :Drawer, val :Int) : Bool

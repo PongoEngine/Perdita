@@ -1,10 +1,14 @@
 
 .p-window {
   position: absolute;
+  top: 0;
+  left: 0;
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
   overflow: hidden;
+  transform: translate3d(0,0,0);
+  will-change: transform;
 }
 
 .p-window:active {
@@ -13,6 +17,10 @@
 
 .p-window-bar {
   height: 30px;
+}
+
+.p-window-content {
+  height: calc(100% - 30px);
 }
 
 .p-window-resizer {
