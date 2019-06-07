@@ -14,7 +14,7 @@ class Window
 	public function new(id :WindowId) : Void
 	{
         this.position = new Point(100, 100);
-        this.dimensions = new Point(100, 100);
+        this.dimensions = new Point(300, 300);
         this.isUpdatingWidth = false;
         this.id = id;
 	}
