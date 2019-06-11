@@ -17,7 +17,8 @@ class Perdita
     public static function textfield<Model, Msg>(msg :Textfield -> InputEvent -> Msg, field :Textfield) :RenderFunction<Model, Msg>
     {
         var filledClass = field.value == "" ? "" : " filled";
-        return div([class_("p-textfield" + filledClass)], [
+        var validClass = field.isValid ? "" : " invalid";
+        return div([class_("p-textfield" + filledClass + validClass)], [
             input([oninput(msg.bind(field)), value(new String(field.value))]),
             span([], [text(field.label)])
         ]);
@@ -79,9 +80,10 @@ class Perdita
             class_("p-window color-container"), 
             onmousedown(selectWindow.bind(window, false)),
             style({
-                // left: window.position.x + "px", 
-                // top: window.position.y + "px",
-                transform: transform,
+                left: window.position.x + "px", 
+                top: window.position.y + "px",
+                zIndex: window.zIndex,
+                // transform: transform,
                 width: window.dimensions.x + "px",
                 height: window.dimensions.y + "px"
             })

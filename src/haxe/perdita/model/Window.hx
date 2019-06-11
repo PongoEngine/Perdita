@@ -10,13 +10,15 @@ class Window
     public var dimensions (default, null) :Point;
     public var isUpdatingWidth :Bool;
     public var id (default, null) :WindowId;
+    public var zIndex :Int;
 
-	public function new(id :WindowId) : Void
+	public function new(id :WindowId, zIndex :Int) : Void
 	{
         this.position = new Point(100, 100);
         this.dimensions = new Point(300, 300);
         this.isUpdatingWidth = false;
         this.id = id;
+        this.zIndex = zIndex;
 	}
 
     public static function resizeTo(thisWindow :Window, x :Int, y :Int) : Void
@@ -30,17 +32,7 @@ class Window
 
     public static function moveBy(thisWindow :Window, x :Int, y :Int) : Void
     {
-        var nX = thisWindow.position.x + x;
-        var nY = thisWindow.position.y + y;
-        thisWindow.position.x = Std.int(Math.max(0, nX));
-        thisWindow.position.y = Std.int(Math.max(0, nY));
-
-        if(thisWindow.position.x + thisWindow.dimensions.x > window.innerWidth) {
-            thisWindow.position.x = Std.int(window.innerWidth - thisWindow.dimensions.x);
-        }
-
-        if(thisWindow.position.y + thisWindow.dimensions.y > window.innerHeight) {
-            thisWindow.position.y = Std.int(window.innerHeight - thisWindow.dimensions.y);
-        }
+        thisWindow.position.x += x;
+        thisWindow.position.y += y;
     }
 }

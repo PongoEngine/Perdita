@@ -44,3 +44,7 @@
     color: #000;
     left: 1px;
 }
+
+.p-textfield.invalid > input + span {
+    background-color: #f77;
+}
